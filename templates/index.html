@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#176b56">
+  <title>Leadlight · Lead qualification</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/" aria-label="Leadlight home"><span class="brand-mark">L</span> Leadlight</a><span class="demo-label">CLIENT DEMO</span></header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow">LESS ADMIN. BETTER CONVERSATIONS.</p>
+      <h1>Welcome to a clearer<br>view of every lead.</h1>
+      <p class="intro-copy">Turn an everyday inquiry into useful details, a clear priority, and a thoughtful next reply. Just paste the message to get started.</p>
+      <div class="steps"><span><b>1</b> Paste an inquiry</span><span><b>2</b> Analyze the lead</span><span><b>3</b> Review &amp; respond</span></div>
+    </section>
+    <div class="workspace">
+      <section class="card input-card" aria-labelledby="message-heading">
+        <div class="card-heading"><div><p class="eyebrow">START HERE</p><h2 id="message-heading">Your lead message</h2></div><span class="pill">Plain text</span></div>
+        <p class="muted">An email, contact form inquiry, or chat message works beautifully.</p>
+        <form id="lead-form">
+          <label for="lead-message">Paste the original inquiry</label>
+          <textarea id="lead-message" name="message" maxlength="12000" rows="12" placeholder="Hi, we're looking for help with…" required aria-describedby="privacy-note character-count"></textarea>
+          <div class="textarea-footer"><button id="sample-button" type="button" class="text-button">Use sample message</button><span id="character-count">0 / 12,000</span></div>
+          <button id="analyze-button" type="submit" class="primary-button"><span id="button-label">Analyze lead</span><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="M5 19 19 5M6 5h13v13" fill="none" stroke="currentColor" stroke-width="1.7"/></svg></button>
+          <p id="privacy-note" class="fine-print">Your message is sent to Cohere for analysis. This demo does not save it to a CRM or database. Review the result before using it.</p>
+        </form>
+      </section>
+      <section id="analysis-panel" class="card output-card" aria-labelledby="analysis-heading" aria-busy="false">
+        <div class="card-heading"><div><p class="eyebrow">THE NEXT STEP, MADE CLEAR</p><h2 id="analysis-heading">Lead overview</h2></div><span class="status-dot" aria-hidden="true"></span></div>
+        <div id="empty-state" class="empty-state"><div class="empty-icon" aria-hidden="true"><svg viewBox="0 0 40 40" width="36" height="36"><path d="M20 4 24 16 36 20 24 24 20 36 16 24 4 20 16 16Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div><h3>A little clarity goes a long way.</h3><p>Your lead’s details, priority, and suggested reply will appear here after analysis.</p><span class="subtle-tag">Powered by Cohere</span></div>
+        <div id="loading-state" class="loading-state" role="status" hidden><span class="spinner" aria-hidden="true"></span><h3>Getting to know this lead…</h3><p>Extracting the details and preparing a helpful reply.</p></div>
+        <div id="error-state" class="error-state" role="alert" hidden><h3>We couldn’t analyze this lead</h3><p id="error-message"></p></div>
+        <div id="results" hidden>
+          <div class="score-row"><div><span id="priority" class="priority"></span><p id="category" class="category"></p></div><div class="score"><strong id="score"></strong><span> / 100</span><small>Lead score</small></div></div>
+          <section class="result-section"><h3>At a glance</h3><p id="summary"></p><dl class="single-detail"><dt>Intent</dt><dd id="intent"></dd></dl></section>
+          <section class="result-section"><h3>Contact details</h3><dl class="details-grid"><div><dt>Name</dt><dd id="name"></dd></div><div><dt>Company</dt><dd id="company"></dd></div><div><dt>Email</dt><dd id="email"></dd></div><div><dt>Phone</dt><dd id="phone"></dd></div></dl></section>
+          <section class="result-section"><h3>What they’re looking for</h3><dl class="details-grid"><div class="full"><dt>Need</dt><dd id="need"></dd></div><div><dt>Budget</dt><dd id="budget"></dd></div><div><dt>Timeline</dt><dd id="timeline"></dd></div></dl></section>
+          <section class="result-section"><h3>Suggested reply</h3><p id="suggested_reply" class="reply"></p></section>
+          <details class="json-section"><summary>View structured JSON</summary><pre id="json-output"></pre></details>
+          <div class="copy-row"><span class="fine-print">Ready for your next CRM step</span><button id="copy-button" type="button" class="secondary-button">Copy JSON</button></div>
+          <p id="copy-status" class="fine-print" role="status"></p>
+        </div>
+      </section>
+    </div>
+    <footer>From first inquiry to a better conversation.<span>Leadlight · A simple qualification demo</span></footer>
+  </main>
+</body>
+</html>
